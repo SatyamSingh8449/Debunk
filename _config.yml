@@ -1,0 +1,25 @@
+title: Your Debunking Site
+description: Fact-checking viral claims and misinformation
+baseurl: "" # Leave empty if serving from root of domain
+url: "https://yourdomain.com" # Your GoDaddy domain
+
+# Build settings
+theme: minima
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-paginate
+
+# Pagination
+paginate: 10
+paginate_path: "/page/:num/"
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      comments: true
