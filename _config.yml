@@ -1,19 +1,39 @@
-title: Your Debunking Site
-description: Fact-checking viral claims and misinformation
-baseurl: "" # Leave empty if serving from root of domain
-url: "https://yourdomain.com" # Your GoDaddy domain
+# Site settings
+title: Debunk Central
+description: Fact-checking viral videos and online claims
+baseurl: ""
+url: "https://yourdomain.com"
+logo: "/assets/images/logo.png"
+
+# SEO settings
+twitter:
+  username: debunkcentral
+facebook:
+  publisher: debunkcentral
+social:
+  name: Debunk Central
+  links:
+    - https://twitter.com/debunkcentral
+    - https://facebook.com/debunkcentral
 
 # Build settings
-theme: minima
-plugins:
-  - jekyll-feed
-  - jekyll-seo-tag
-  - jekyll-sitemap
-  - jekyll-paginate
-
-# Pagination
+markdown: kramdown
+permalink: /:year/:month/:day/:title/
 paginate: 10
 paginate_path: "/page/:num/"
+
+# Collections
+collections:
+  categories:
+    output: true
+    permalink: /category/:name/
+
+# Plugins
+plugins:
+  - jekyll-paginate
+  - jekyll-sitemap
+  - jekyll-seo-tag
+  - jekyll-feed
 
 # Defaults
 defaults:
@@ -23,3 +43,4 @@ defaults:
     values:
       layout: "post"
       comments: true
+      share: true

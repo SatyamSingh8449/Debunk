@@ -1,56 +1,80 @@
 ---
 layout: default
 ---
-<article class="post">
-  <header class="post-header mb-4">
-    <h1 class="post-title">{{ page.title }}</h1>
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">{{ page.title }}</h1>
     <div class="post-meta">
-      <time datetime="{{ page.date | date_to_xmlschema }}">
-        {{ page.date | date: "%B %-d, %Y" }}
+      <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
+        {{ page.date | date: "%b %-d, %Y" }}
       </time>
       {% if page.author %}
-      • <span class="author">{{ page.author }}</span>
+        • <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <span itemprop="name">{{ page.author }}</span>
+          </span>
       {% endif %}
-      
-      {% if page.categories %}
-      • <span class="categories">
-        {% for category in page.categories %}
-        <a href="{{ site.baseurl }}/categories#{{ category | slugify }}" class="badge bg-primary">{{ category }}</a>
-        {% endfor %}
-      </span>
-      {% endif %}
+      • {% include reading-time.html %}
+    </div>
+    
+    <div class="post-categories">
+      {% for category in page.categories %}
+        <a href="{{ site.baseurl }}/category/{{ category | slugify }}/">{{ category }}</a>
+      {% endfor %}
     </div>
   </header>
 
-  {% if page.video_embed %}
-  <div class="video-container mb-4">
-    {{ page.video_embed }}
+  <div class="post-featured-video">
+    {% if page.video_embed %}
+      <div class="video-container">
+        {{ page.video_embed }}
+      </div>
+      <div class="video-caption">Original video being debunked</div>
+    {% endif %}
   </div>
-  {% endif %}
 
-  <div class="post-content">
+  <div class="post-content" itemprop="articleBody">
     {{ content }}
   </div>
-  
-  {% if page.sources %}
-  <div class="sources mt-4">
+
+  <div class="post-sources">
     <h3>Sources:</h3>
     <ul>
       {% for source in page.sources %}
-      <li><a href="{{ source.url }}" target="_blank" rel="noopener">{{ source.name }}</a></li>
+        <li><a href="{{ source.url }}" target="_blank" rel="noopener noreferrer">{{ source.name }}</a></li>
       {% endfor %}
     </ul>
   </div>
-  {% endif %}
-  
-  {% if page.tags %}
-  <div class="tags mt-4">
+
+  <div class="post-tags">
     {% for tag in page.tags %}
-    <a href="{{ site.baseurl }}/tags#{{ tag | slugify }}" class="badge bg-secondary">#{{ tag }}</a>
+      <a href="{{ site.baseurl }}/tag/{{ tag | slugify }}/">#{{ tag }}</a>
     {% endfor %}
   </div>
-  {% endif %}
 
   {% include social-share.html %}
-  {% include disqus.html %}
+  
+  <div class="post-navigation">
+    {% if page.previous.url %}
+      <a class="prev" href="{{ page.previous.url }}">&laquo; {{ page.previous.title }}</a>
+    {% endif %}
+    {% if page.next.url %}
+      <a class="next" href="{{ page.next.url }}">{{ page.next.title }} &raquo;</a>
+    {% endif %}
+  </div>
+
+  {% if site.related_posts.size >= 1 %}
+    <div class="related-posts">
+      <h3>Related Debunks</h3>
+      <div class="post-grid">
+        {% for related in site.related_posts limit:3 %}
+          {% include post-card.html post=related %}
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+
+  {% if page.comments %}
+    <div id="disqus_thread"></div>
+    {% include disqus.html %}
+  {% endif %}
 </article>
