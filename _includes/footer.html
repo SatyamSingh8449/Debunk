@@ -1,0 +1,33 @@
+<footer class="site-footer bg-dark text-white mt-5 py-4">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 mb-3">
+        <h5>{{ site.title }}</h5>
+        <p>{{ site.description }}</p>
+      </div>
+      <div class="col-md-4 mb-3">
+        <h5>Quick Links</h5>
+        <ul class="list-unstyled">
+          <li><a href="{{ site.baseurl }}/" class="text-white">Home</a></li>
+          <li><a href="{{ site.baseurl }}/about/" class="text-white">About</a></li>
+          <li><a href="{{ site.baseurl }}/contact/" class="text-white">Contact</a></li>
+          <li><a href="{{ site.baseurl }}/privacy-policy/" class="text-white">Privacy Policy</a></li>
+        </ul>
+      </div>
+      <div class="col-md-4 mb-3">
+        <h5>Follow Us</h5>
+        <div class="social-icons">
+          <a href="#" class="text-white me-2"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="text-white me-2"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="text-white me-2"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="text-white me-2"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-12 text-center">
+        <p>&copy; {{ site.time | date: '%Y' }} {{ site.title }}. All rights reserved.</p>
+      </div>
+    </div>
+  </div>
+</footer>

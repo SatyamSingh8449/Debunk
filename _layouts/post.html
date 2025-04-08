@@ -1,0 +1,56 @@
+---
+layout: default
+---
+<article class="post">
+  <header class="post-header mb-4">
+    <h1 class="post-title">{{ page.title }}</h1>
+    <div class="post-meta">
+      <time datetime="{{ page.date | date_to_xmlschema }}">
+        {{ page.date | date: "%B %-d, %Y" }}
+      </time>
+      {% if page.author %}
+      • <span class="author">{{ page.author }}</span>
+      {% endif %}
+      
+      {% if page.categories %}
+      • <span class="categories">
+        {% for category in page.categories %}
+        <a href="{{ site.baseurl }}/categories#{{ category | slugify }}" class="badge bg-primary">{{ category }}</a>
+        {% endfor %}
+      </span>
+      {% endif %}
+    </div>
+  </header>
+
+  {% if page.video_embed %}
+  <div class="video-container mb-4">
+    {{ page.video_embed }}
+  </div>
+  {% endif %}
+
+  <div class="post-content">
+    {{ content }}
+  </div>
+  
+  {% if page.sources %}
+  <div class="sources mt-4">
+    <h3>Sources:</h3>
+    <ul>
+      {% for source in page.sources %}
+      <li><a href="{{ source.url }}" target="_blank" rel="noopener">{{ source.name }}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+  
+  {% if page.tags %}
+  <div class="tags mt-4">
+    {% for tag in page.tags %}
+    <a href="{{ site.baseurl }}/tags#{{ tag | slugify }}" class="badge bg-secondary">#{{ tag }}</a>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  {% include social-share.html %}
+  {% include disqus.html %}
+</article>
